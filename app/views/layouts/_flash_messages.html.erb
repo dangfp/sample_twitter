@@ -1,0 +1,7 @@
+<% if flash.keys.any? %>
+  <% flash.keys.each do |key| %>
+    <div class="alert alert-<%= key == 'notice' ? 'success' : 'danger' %>">
+      <%= flash[key] %>
+    </div>
+  <% end %>
+<% end %>
