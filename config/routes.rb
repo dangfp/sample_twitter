@@ -1,5 +1,10 @@
 Rails.application.routes.draw do
   root 'users#index'
+
+  get '/login', to: 'sessions#new'
+  post '/login', to: 'sessions#create'
+  get '/logout', to: 'sessions#destory'
+
   resources :users
   # resources :tweets
   # The priority is based upon order of creation: first created -> highest priority.
