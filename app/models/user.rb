@@ -1,4 +1,6 @@
 class User < ActiveRecord::Base
+  has_many :tweets
+  
   has_secure_password validations: false
 
   validates :username, presence: true, uniqueness: true, length: {minimum: 6}

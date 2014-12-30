@@ -1,2 +1,4 @@
-<%= binding.pry %>
 <h4><%= @user.username %></h4>
+<% @composed_tweets.each do |tweet| %>
+  <%= render 'tweets/tweet', tweet: tweet %>
+<% end %>

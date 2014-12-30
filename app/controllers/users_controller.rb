@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+  before_action :require_user, except: [:new, :create]
   before_action :set_user, only: [:show, :edit, :update]
 
   def index
@@ -6,6 +7,7 @@ class UsersController < ApplicationController
   end
 
   def show
+    @composed_tweets = @user.tweets
   end
 
   def new
@@ -43,6 +45,6 @@ class UsersController < ApplicationController
     end
 
     def set_user
-      @user = User.find(params[:id])
+      @user = User.find(session[:user_id])
     end
 end
