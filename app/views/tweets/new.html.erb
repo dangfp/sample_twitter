@@ -3,7 +3,7 @@
 <%= render 'shared/errors', object: @tweet %>
 
 <%= form_for @tweet do |f| %>
-  <%= f.text_area :body %>
+  <%= f.text_area :body, rows: 4 %>
   <br>
   <%= f.submit 'Tweet' %>
 <% end %>

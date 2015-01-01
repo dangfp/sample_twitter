@@ -1,4 +1,13 @@
 <h4><%= @user.username %></h4>
+
+<h5>TWEETS</h5>
+<%= @user.tweets.count %>
+<h5>FOLLOWING</h5>
+<%= link_to @user.followings.count, following_user_path(@user) %>
+<h5>FOLLOWERS</h5>
+<%= link_to @user.followers.count, followers_user_path(@user) %>
+
+<br>
 <% @composed_tweets.each do |tweet| %>
   <%= render 'tweets/tweet', tweet: tweet %>
 <% end %>

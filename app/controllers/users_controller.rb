@@ -1,10 +1,6 @@
 class UsersController < ApplicationController
   before_action :require_user, except: [:new, :create]
-  before_action :set_user, only: [:show, :edit, :update]
-
-  def index
-    @users = User.all
-  end
+  before_action :set_user, only: [:show, :edit, :update, :follow]
 
   def show
     @composed_tweets = @user.tweets
@@ -36,6 +32,33 @@ class UsersController < ApplicationController
     else
       render :edit
     end
+  end
+
+  def who_to_follow
+    @who_to_follow = current_user.who_to_follow
+  end
+
+  def follow
+    to_follow_user = User.find(params[:id])
+
+    current_user.followings << to_follow_user
+    flash[:notice] = "You've followed #{to_follow_user.username}."
+    redirect_to :back
+  end
+
+  def unfollow
+    followed_user = User.find(params[:id])
+    Relationship.find_by(followed_id: params[:id], follower_id: current_user.id).delete
+    flash[:notice] = "You've unfollowed #{followed_user.username}."
+    redirect_to :back
+  end
+
+  def following
+    @following = current_user.followings
+  end
+
+  def followers
+    @followers = current_user.followers
   end
 
   private

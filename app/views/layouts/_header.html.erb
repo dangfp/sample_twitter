@@ -9,7 +9,7 @@
       <li><%#= link_to "Mentions (#{current_user.num_unread_mentions})", mentions_path %></li>
     </ul>
     <ul class="nav navbar-nav navbar-right">
-      <li><%= link_to "Welcome, #{current_user.username}", user_path(current_user.id) %></li>
+      <li><%= link_to "Welcome, #{current_user.username}", root_path %></li>
       <li><%= link_to 'Log Out', logout_path %></li>
     </ul>
   <% else %>
