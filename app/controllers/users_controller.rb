@@ -2,6 +2,13 @@ class UsersController < ApplicationController
   before_action :require_user, except: [:new, :create]
   before_action :set_user, only: [:show, :edit, :update, :follow]
 
+  def index
+    @composed_tweets = []
+    User.where(id: current_user.not_to_be_followed_user_ids).each do |user|
+      @composed_tweets += user.tweets
+    end
+  end
+
   def show
     @composed_tweets = @user.tweets
   end

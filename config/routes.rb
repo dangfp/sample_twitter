@@ -1,11 +1,11 @@
 Rails.application.routes.draw do
-  root 'users#show'
+  root 'users#index'
 
   get '/login', to: 'sessions#new'
   post '/login', to: 'sessions#create'
   get '/logout', to: 'sessions#destory'
 
-  resources :users, only: [:new, :create, :edit, :update] do
+  resources :users, only: [:show, :new, :create, :edit, :update] do
     member do
       get 'who_to_follow'
       get 'following'
@@ -14,6 +14,7 @@ Rails.application.routes.draw do
       post 'unfollow'
     end
   end
+
   resources :tweets
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

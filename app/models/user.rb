@@ -21,10 +21,12 @@ class User < ActiveRecord::Base
   before_save { self.email = email.downcase }
 
   def who_to_follow
-    not_to_be_followed_users = []
-    not_to_be_followed_users = self.followings.ids
-    not_to_be_followed_users << self.id
+    User.where.not(id: not_to_be_followed_user_ids)
+  end
 
-    User.where.not(id: not_to_be_followed_users)
+  def not_to_be_followed_user_ids
+    not_to_be_followed_user_ids = []
+    not_to_be_followed_user_ids = self.followings.ids
+    not_to_be_followed_user_ids << self.id
   end
 end
