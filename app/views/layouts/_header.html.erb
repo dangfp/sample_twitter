@@ -5,8 +5,7 @@
   <% if logged_in? %>
     <ul class="nav navbar-nav">
       <li><%= link_to 'Tweet', new_tweet_path %></li>
-      <li><%#= link_to 'Timeline', timeline_path %> </li>
-      <li><%#= link_to "Mentions (#{current_user.num_unread_mentions})", mentions_path %></li>
+      <li><%= link_to "Mentions", mentions_user_path(current_user) %></li>
       <li><%= link_to 'Who_to_follow', who_to_follow_user_path(current_user) %></li>
     </ul>
     <ul class="nav navbar-nav navbar-right">

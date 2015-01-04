@@ -1,6 +1,6 @@
 <h4><%= user.username %></h4>
 
-<% if params[:action] == 'show' %>
+<% if params[:action] == 'show' and user == current_user %>
   <%= link_to 'Edit Profile', edit_user_path(user) %>
 <% end %>
 

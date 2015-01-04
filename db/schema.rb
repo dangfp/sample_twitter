@@ -11,7 +11,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141231030434) do
+ActiveRecord::Schema.define(version: 20150104012545) do
+
+  create_table "mentions", force: :cascade do |t|
+    t.boolean  "read"
+    t.integer  "user_id"
+    t.integer  "tweet_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "relationships", force: :cascade do |t|
     t.integer  "follower_id"

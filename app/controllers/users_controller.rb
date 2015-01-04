@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
   before_action :require_user, except: [:new, :create]
-  before_action :set_user, only: [:show, :edit, :update, :follow]
+  before_action :set_user, only: [:show, :follow, :unfollow]
+  before_action :require_current_user , only: [:edit, :update]
 
   def index
     @composed_tweets = []
@@ -30,9 +31,12 @@ class UsersController < ApplicationController
   end
 
   def edit
+    # @user = current_user
   end
 
   def update
+    # @user = current_user
+
     if @user.update(user_params)
       flash[:notice] = "You have updated profile."
       redirect_to root_path
@@ -46,7 +50,7 @@ class UsersController < ApplicationController
   end
 
   def follow
-    to_follow_user = User.find(params[:id])
+    to_follow_user = set_user
 
     current_user.followings << to_follow_user
     flash[:notice] = "You've followed #{to_follow_user.username}."
@@ -54,7 +58,7 @@ class UsersController < ApplicationController
   end
 
   def unfollow
-    followed_user = User.find(params[:id])
+    followed_user = set_user
     Relationship.find_by(followed_id: params[:id], follower_id: current_user.id).delete
     flash[:notice] = "You've unfollowed #{followed_user.username}."
     redirect_to :back
@@ -68,6 +72,9 @@ class UsersController < ApplicationController
     @followers = current_user.followers
   end
 
+  def mentions
+  end
+
   private
 
     def user_params
@@ -75,6 +82,16 @@ class UsersController < ApplicationController
     end
 
     def set_user
-      @user = User.find(session[:user_id])
+      @user = User.find(params[:id])
+    end
+
+    def require_current_user
+      binding.pry
+      if current_user.id.to_s == params[:id]
+        @user = current_user
+      else
+        flash[:error] = "Only for current user to do that."
+        redirect_to root_path
+      end
     end
 end

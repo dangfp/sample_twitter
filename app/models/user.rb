@@ -2,6 +2,7 @@ class User < ActiveRecord::Base
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
 
   has_many :tweets
+  has_many :mentions
 
   has_many :following_relationships, class_name: 'Relationship', foreign_key: 'follower_id'
   has_many :followings, through: :following_relationships, source: 'following'

@@ -13,7 +13,6 @@ class TweetsController < ApplicationController
     @tweet = Tweet.new(params.require(:tweet).permit(:body, :creator))
     @tweet.creator = current_user
 
-    # @somenoe function to do
     if @tweet.save
       flash[:notice] = "Your tweet was composed."
       redirect_to root_path
