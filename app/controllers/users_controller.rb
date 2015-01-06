@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
   before_action :require_user, except: [:new, :create]
   before_action :set_user, only: [:show, :follow, :unfollow]
-  before_action :require_current_user , only: [:edit, :update]
+  before_action :require_current_user , only: [:edit, :update, :mentions]
 
   def index
     @composed_tweets = []
@@ -73,6 +73,7 @@ class UsersController < ApplicationController
   end
 
   def mentions
+    @user.mark_mentions_to_read
   end
 
   private
@@ -86,7 +87,6 @@ class UsersController < ApplicationController
     end
 
     def require_current_user
-      binding.pry
       if current_user.id.to_s == params[:id]
         @user = current_user
       else

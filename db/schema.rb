@@ -14,7 +14,7 @@
 ActiveRecord::Schema.define(version: 20150104012545) do
 
   create_table "mentions", force: :cascade do |t|
-    t.boolean  "read"
+    t.boolean  "read",       default: false
     t.integer  "user_id"
     t.integer  "tweet_id"
     t.datetime "created_at"

@@ -30,4 +30,18 @@ class User < ActiveRecord::Base
     not_to_be_followed_user_ids = self.followings.ids
     not_to_be_followed_user_ids << self.id
   end
+
+  def not_read_mentions
+    mentions.where(read: false)
+  end
+
+  def not_read_mentions_count
+    not_read_mentions.count
+  end
+
+  def mark_mentions_to_read
+    not_read_mentions.each do |mention|
+      mention.update(read: true)
+    end
+  end
 end
