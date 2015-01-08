@@ -28,12 +28,9 @@ class UsersController < ApplicationController
   end
 
   def edit
-    # @user = current_user
   end
 
   def update
-    # @user = current_user
-
     if @user.update(user_params)
       flash[:notice] = "You have updated profile."
       redirect_to root_path
