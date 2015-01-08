@@ -23,9 +23,9 @@ class TweetsController < ApplicationController
   end
 
   def retweet
-    retweet = Retweet.new(retweetor: current_user, tweet: @tweet)
+    re_tweet = Tweet.new(creator: current_user, body: @tweet.body, origin_id: @tweet.id)
 
-    if retweet.save
+    if re_tweet.save
       flash[:notice] = "You've retweet successfully."
     else
       flash[:error] = "You've retweet unsuccessfully."

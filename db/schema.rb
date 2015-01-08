@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150107005830) do
+ActiveRecord::Schema.define(version: 20150108093526) do
 
   create_table "mentions", force: :cascade do |t|
     t.boolean  "read",       default: false
@@ -34,6 +34,8 @@ ActiveRecord::Schema.define(version: 20150107005830) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "parent_id"
+    t.integer  "origin_id"
+    t.integer  "retweets_count", default: 0
   end
 
   create_table "users", force: :cascade do |t|
