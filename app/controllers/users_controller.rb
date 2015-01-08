@@ -4,10 +4,7 @@ class UsersController < ApplicationController
   before_action :require_current_user , only: [:edit, :update, :mentions]
 
   def index
-    @composed_tweets = []
-    User.where(id: current_user.not_to_be_followed_user_ids).each do |user|
-      @composed_tweets += user.tweets
-    end
+    @composed_tweets = current_user.all_tweets_for_display
   end
 
   def show
@@ -50,17 +47,14 @@ class UsersController < ApplicationController
   end
 
   def follow
-    to_follow_user = set_user
-
-    current_user.followings << to_follow_user
-    flash[:notice] = "You've followed #{to_follow_user.username}."
+    current_user.followings << @user
+    flash[:notice] = "You've followed #{@user.username}."
     redirect_to :back
   end
 
   def unfollow
-    followed_user = set_user
     Relationship.find_by(followed_id: params[:id], follower_id: current_user.id).delete
-    flash[:notice] = "You've unfollowed #{followed_user.username}."
+    flash[:notice] = "You've unfollowed #{@user.username}."
     redirect_to :back
   end
 

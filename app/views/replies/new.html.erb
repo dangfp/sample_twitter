@@ -1,0 +1,7 @@
+<h4>Reply the Tweet</h4>
+
+<%= form_for @reply, url: reply_tweet_path(@tweet) do |f| %>
+  <%= f.text_area :body, value: "@#{@tweet.creator.username} ", rows: 4 %>
+  <br>
+  <%= f.submit 'Reply' %>
+<% end %>

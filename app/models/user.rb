@@ -25,10 +25,14 @@ class User < ActiveRecord::Base
     User.where.not(id: not_to_be_followed_user_ids)
   end
 
-  def not_to_be_followed_user_ids
-    not_to_be_followed_user_ids = []
-    not_to_be_followed_user_ids = self.followings.ids
-    not_to_be_followed_user_ids << self.id
+  def all_tweets_for_display
+    all_tweets = []
+
+    all_tweets = self.tweets
+    self.followings.each do |following|
+      all_tweets += following.tweets
+    end
+    all_tweets
   end
 
   def not_read_mentions

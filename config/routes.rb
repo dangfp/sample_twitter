@@ -16,7 +16,13 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :tweets
+  resources :tweets do
+    member do
+      get 'reply', to: 'replies#new'
+      post 'reply', to: 'replies#create'
+      post 'retweet', to: 'tweets#retweet'
+    end
+  end
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

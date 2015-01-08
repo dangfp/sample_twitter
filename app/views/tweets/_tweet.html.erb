@@ -1,5 +1,18 @@
-<%= link_to "@#{tweet.creator.username}", user_path(tweet.creator) %>
-<span><%= tweet.created_at %></span>
-<br>
-<%= tweet.body %>
-<br>
+<div class="well">
+  <%= link_to "@#{tweet.creator.username}", user_path(tweet.creator) %>
+  <span><%= tweet.created_at %></span>
+  <br>
+  <%= tweet.body %>
+  <br>
+  <%= link_to 'Reply', reply_tweet_path(tweet) %>
+  <%= link_to 'Retweet', retweet_tweet_path(tweet), method: 'post' %>
+  <br>
+
+  <% tweet.replies.each do |reply| %>
+    <%= link_to "@#{reply.creator.username}", user_path(reply.creator) %>
+    <span><%= reply.created_at %></span>
+    <br>
+    <%= reply.body %>
+    <br>
+  <% end %>
+</div>

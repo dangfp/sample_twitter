@@ -1,6 +1,7 @@
 class Tweet < ActiveRecord::Base
   belongs_to :creator, foreign_key: 'user_id', class_name: 'User'
   has_one :mention
+  has_many :replies, class_name: 'Tweet', foreign_key: 'parent_id'
 
   validates :body, presence: true, length: {maximum: 140}
 
