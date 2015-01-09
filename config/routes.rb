@@ -23,6 +23,8 @@ Rails.application.routes.draw do
       post 'retweet', to: 'tweets#retweet'
     end
   end
+
+  get '/hashtag/:id', to: 'hashtags#show'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

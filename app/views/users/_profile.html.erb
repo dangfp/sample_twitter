@@ -1,17 +1,36 @@
-<h4><%= user.username %></h4>
+<div class="col-md-3">
+  <div class='userinfo text-center'>
+   <h3><%= user.username %></h3>
+   <% if params[:action] == 'show' and user == current_user %>
+     <h5>[<%= link_to 'Edit Profile', edit_user_path(user) %>]</h5>
+   <% end %>
+  </div>
 
-<% if params[:action] == 'show' and user == current_user %>
-  <%= link_to 'Edit Profile', edit_user_path(user) %>
-<% end %>
-
-<h5>TWEETS</h5>
-<%= user.tweets.count %>
-<h5>FOLLOWING</h5>
-<%= link_to user.followings.count, following_user_path(user) %>
-<h5>FOLLOWERS</h5>
-<%= link_to user.followers.count, followers_user_path(user) %>
-
-<br>
-<% tweets.each do |tweet| %>
-  <%= render 'tweets/tweet', tweet: tweet %>
-<% end %>
+  <div class="profile-card-stats text-center">
+    <ul class="profile-card-stat-list">
+      <li class="profile-card arrange-size-fit">
+        <%= link_to user_path(user) do %>
+          <span class="profile-card-stat-label">Tweets</span>
+          <span class="profile-card-stat-value"><%= user.tweets.count %></span>
+        <% end %>
+      </li>
+      <li class="profile-card arrange-size-fit">
+        <%= link_to following_user_path(user) do %>
+          <span class="profile-card-stat-label">Following</span>
+          <span class="profile-card-stat-value"><%= user.followings.count %></span>
+        <% end %>
+      </li>
+      <li class="profile-card arrange-size-fit">
+        <%= link_to followers_user_path(user) do %>
+          <span class="profile-card-stat-label">Followers</span>
+          <span class="profile-card-stat-value"><%= user.followers.count %></span>
+        <% end %>
+      </li>
+    </ul>
+  </div>
+</div>
+<div class="col-md-9">
+  <% tweets.each do |tweet| %>
+    <%= render 'tweets/tweet', tweet: tweet %>
+  <% end %>
+</div>
