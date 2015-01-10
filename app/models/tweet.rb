@@ -1,9 +1,9 @@
 class Tweet < ActiveRecord::Base
-  belongs_to :creator, foreign_key: 'user_id', class_name: 'User'
+  belongs_to :creator, foreign_key: 'user_id', class_name: 'User', counter_cache: true
   has_one :mention
   has_many :replies, foreign_key: 'parent_id', class_name: 'Tweet'
 
-  belongs_to :origin, foreign_key: 'origin_id', class_name: 'Tweet', counter_cache: :retweets_count
+  belongs_to :origin, foreign_key: 'origin_id', class_name: 'Tweet', counter_cache: true
   has_many :tweets, foreign_key: 'origin_id', class_name: 'Tweet'
 
   validates :body, presence: true, length: {maximum: 140}

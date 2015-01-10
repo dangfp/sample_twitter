@@ -50,7 +50,7 @@ class UsersController < ApplicationController
   end
 
   def unfollow
-    Relationship.find_by(followed_id: params[:id], follower_id: current_user.id).delete
+    Relationship.find_by(followed_id: params[:id], follower_id: current_user.id).destroy
     flash[:notice] = "You've unfollowed #{@user.username}."
     redirect_to :back
   end

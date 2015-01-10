@@ -11,19 +11,19 @@
       <li class="profile-card arrange-size-fit">
         <%= link_to user_path(user) do %>
           <span class="profile-card-stat-label">Tweets</span>
-          <span class="profile-card-stat-value"><%= user.tweets.count %></span>
+          <span class="profile-card-stat-value"><%= user.tweets.size %></span>
         <% end %>
       </li>
       <li class="profile-card arrange-size-fit">
         <%= link_to following_user_path(user) do %>
           <span class="profile-card-stat-label">Following</span>
-          <span class="profile-card-stat-value"><%= user.followings.count %></span>
+          <span class="profile-card-stat-value"><%= user.followings.size %></span>
         <% end %>
       </li>
       <li class="profile-card arrange-size-fit">
         <%= link_to followers_user_path(user) do %>
           <span class="profile-card-stat-label">Followers</span>
-          <span class="profile-card-stat-value"><%= user.followers.count %></span>
+          <span class="profile-card-stat-value"><%= user.followers.size %></span>
         <% end %>
       </li>
     </ul>
