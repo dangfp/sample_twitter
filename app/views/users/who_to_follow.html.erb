@@ -1,5 +1,6 @@
 <% @who_to_follow.each do |user| %>
-  <%= link_to "#{user.username}", '#' %>
-  <%= link_to '  +follow', follow_user_path(user), method: :post %>
-  <br>
+  <div class="well">
+    <%= link_to "#{user.username}", user_path(user) %>
+    <%= link_to '  +Follow', follow_user_path(user), method: :post %>
+  </div>
 <% end %>

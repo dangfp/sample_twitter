@@ -1,9 +1,10 @@
-<ul>
-  <% users.each do |user| %>
+<% users.each do |user| %>
+  <div class="well">
+    <%= link_to user.username, user_path(user) %>
     <% if current_user.followings.include?(user) %>
-      <li><%= user.username %><%= link_to '  -Unfollow', unfollow_user_path(user), method: :post %></li>
+      <%= link_to '  -Unfollow', unfollow_user_path(user), method: :post %>
     <% else %>
-      <li><%= user.username %><%= link_to '  +Follow', follow_user_path(user), method: :post %></li>
+      <%= link_to '  +Follow', follow_user_path(user), method: :post %>
     <% end %>
-  <% end %>
-</ul>
+  </div>
+<% end %>

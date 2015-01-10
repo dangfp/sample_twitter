@@ -1,7 +1,14 @@
-<h4>Reply the Tweet</h4>
+<h4 class="new-tweet">Reply the Tweet</h4>
 
-<%= form_for @reply, url: reply_tweet_path(@tweet) do |f| %>
-  <%= f.text_area :body, value: "@#{@tweet.creator.username} ", rows: 4 %>
-  <br>
-  <%= f.submit 'Reply' %>
+<%= form_for @reply, url: reply_tweet_path(@tweet), html: { class: "form-horizontal", role: "form" } do |f| %>
+  <div class="form-group">
+    <div class="col-sm-6">
+      <%= f.text_area :body, value: "@#{@tweet.creator.username} ", rows: 6, class: "form-control" %>
+    </div>
+  </div>
+  <div class="form-group">
+    <div class="col-sm-6">
+      <%= f.submit 'Reply', class: "btn btn-success" %>
+    </div>
+  </div>
 <% end %>
