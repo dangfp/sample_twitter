@@ -23,6 +23,7 @@ class TweetsController < ApplicationController
   end
 
   def retweet
+    binding.pry
     re_tweet = Tweet.new(creator: current_user, body: @tweet.body, origin_id: @tweet.id)
 
     if re_tweet.save
